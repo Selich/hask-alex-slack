@@ -1,0 +1,71 @@
+service: lambert-bday
+
+provider:
+  name: aws
+  runtime: haskell
+  region: us-east-1
+  stage: dev
+  environment:
+    DYNAMODB_TABLE: lambert-${self:custom.stage}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:*"
+    - Effect: Allow
+      Action:
+        - lambda:InvokeFunction
+      Resource: "arn:aws:lambda:${opt:region, self:provider.region}:*:*"
+  logRetentionInDays: ${self:custom.logRetentionInDays.${self:custom.stage}, 7}
+
+plugins:
+  - serverless-ssm-fetch
+  - serverless-haskell
+  - serverless-offline
+
+functions:
+   main:
+     handler: lambert-bday.lambert-bday-exe
+     events:
+      - http:
+          path: /
+          method: post
+          cors: true
+
+custom:
+  dynamodb:
+    stages:
+      -dev
+    start:
+      port: 8000
+      migrate: true
+      seed: true
+      inMemory: true
+    seed:
+      dev:
+        sources:
+          - table: users
+            sources: [".seeds/users.json"]
+
+  serverless-offline:
+    port: 3333
+
+  stage: ${opt:stage, self:provider.stage}
+  serverlessSsmFetch:
+    SLACK_CLIENT_ID: /lambert/${self:custom.stage}/slack/clientId~true
+    SLACK_CLIENT_SECRET: /lambert/${self:custom.stage}/slack/clientSecret~true
+    SLACK_BOT_SCOPE: /lambert/${self:custom.stage}/slack/botScope
+    SLACK_BOT_SIGNING_SECRET: /lambert/${self:custom.stage}/slack/signingSecret~true
+    OAUTH_REDIRECT_URI: /lambert/${self:custom.stage}/slack/OAuthRedirectUri
+    LUMIGO_TOKEN: /lambert/${self:custom.stage}/lumigoToken~true
+  logRetentionInDays:
+    prod: 30
+    dev: 7
+  dynamoCapacityUnits:
+    prod: 15
+    dev: 5

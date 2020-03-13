@@ -1,0 +1,110 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.31.2.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 4e4afc9b4a77d7d0e430079668b13135ba23ca78e366d92bae43cc075e693980
+
+name:           lambert-bday
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/Selich/hask#readme>
+homepage:       https://github.com/lambdaworks/lambda#readme
+bug-reports:    https://github.com/lambdaworks/lambda/issues
+build-type:     Simple
+extra-source-files:
+    README.md
+
+source-repository head
+  type: git
+  location: https://github.com/lambdaworks/lambda
+
+library
+  exposed-modules:
+      Domain.CreateUserInput
+      Domain.User
+      ENV
+      Handlers.HandleEdit
+      Handlers.HandleList
+      Handlers.HandleNew
+      Lib
+      Repositories.CreateUser
+      Repositories.GetUsers
+      Repositories.RequestHandler
+      Repositories.TransformUser
+      Util.URLEncodedParser
+  other-modules:
+      Paths_lambert_bday
+  hs-source-dirs:
+      src
+  build-depends:
+      aeson
+    , aeson-pretty
+    , amazonka
+    , amazonka-core
+    , amazonka-dynamodb
+    , amazonka-s3
+    , amazonka-xray
+    , array
+    , base >=4.7 && <5
+    , bytestring
+    , directory
+    , dotenv
+    , dynamodb-simple
+    , filepath
+    , ghc-prim
+    , hal
+    , hashable
+    , lens
+    , linklater
+    , mtl >=2.2.2
+    , pretty-show
+    , scientific
+    , serverless-haskell
+    , slack-web
+    , split
+    , text
+    , unordered-containers
+    , uuid
+    , websockets >=0.12.7.0
+  default-language: Haskell2010
+
+executable lambert-bday-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_lambert_bday
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      aeson
+    , aeson-pretty
+    , amazonka
+    , amazonka-core
+    , amazonka-dynamodb
+    , amazonka-s3
+    , amazonka-xray
+    , array
+    , base >=4.7 && <5
+    , bytestring
+    , directory
+    , dotenv
+    , dynamodb-simple
+    , filepath
+    , ghc-prim
+    , hal
+    , hashable
+    , lambert-bday
+    , lens
+    , linklater
+    , mtl >=2.2.2
+    , pretty-show
+    , scientific
+    , serverless-haskell
+    , slack-web
+    , split
+    , text
+    , unordered-containers
+    , uuid
+    , websockets >=0.12.7.0
+  default-language: Haskell2010

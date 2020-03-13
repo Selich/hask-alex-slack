@@ -1,0 +1,53 @@
+name:                lambert-bday
+version:             0.1.0.0
+github:              "lambdaworks/lambda"
+
+extra-source-files:
+- README.md
+
+description:         Please see the README on GitHub at <https://github.com/Selich/hask#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+- linklater
+- text
+- mtl >= 2.2.2
+- aeson
+- serverless-haskell
+- amazonka-dynamodb
+- amazonka-xray
+- amazonka
+- amazonka-core
+- bytestring
+- amazonka-s3
+- dotenv
+- split
+- filepath
+- directory
+- lens
+- dynamodb-simple
+- unordered-containers
+- pretty-show
+- aeson-pretty
+- ghc-prim
+- scientific
+- uuid
+- hal
+- hashable
+- slack-web
+- websockets >= 0.12.7.0
+- array
+
+library:
+  source-dirs: src
+
+executables:
+  lambert-bday-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - lambert-bday
