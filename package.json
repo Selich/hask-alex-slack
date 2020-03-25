@@ -5,7 +5,7 @@
   "dependencies": {
     "serverless": "^1.65.0",
     "serverless-dynamodb-local": "^0.2.39",
-    "serverless-haskell": "^0.10.1",
+    "serverless-haskell": "^0.10.2",
     "serverless-offline": "^5.12.1",
     "serverless-ssm-fetch": "^1.0.2"
   }

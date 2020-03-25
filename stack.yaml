@@ -3,7 +3,7 @@ packages:
 - .
 extra-deps:
 - linklater-4.0.0.2
-- serverless-haskell-0.10.1
+- serverless-haskell-0.10.2
 - wai-3.2.2.1
 - warp-3.3.9
 - mtl-2.2.2

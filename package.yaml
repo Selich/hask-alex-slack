@@ -13,7 +13,7 @@ dependencies:
 - text
 - mtl >= 2.2.2
 - aeson
-- serverless-haskell
+- serverless-haskell >= 0.10.1
 - amazonka-dynamodb
 - amazonka-xray
 - amazonka

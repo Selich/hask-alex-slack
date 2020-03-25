@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 4e4afc9b4a77d7d0e430079668b13135ba23ca78e366d92bae43cc075e693980
+-- hash: 5abe57fe9f883547f25ed1806ae8c87b41b85c9d093fdb8c490e92351c9cc9cb
 
 name:           lambert-bday
 version:        0.1.0.0
@@ -21,17 +21,16 @@ source-repository head
 
 library
   exposed-modules:
+      Bot
       Domain.CreateUserInput
       Domain.User
       ENV
-      Handlers.HandleEdit
-      Handlers.HandleList
-      Handlers.HandleNew
-      Lib
+      Handlers
       Repositories.CreateUser
       Repositories.GetUsers
       Repositories.RequestHandler
       Repositories.TransformUser
+      Util.TokenParser
       Util.URLEncodedParser
   other-modules:
       Paths_lambert_bday
@@ -60,7 +59,7 @@ library
     , mtl >=2.2.2
     , pretty-show
     , scientific
-    , serverless-haskell
+    , serverless-haskell >=0.10.1
     , slack-web
     , split
     , text
@@ -100,7 +99,7 @@ executable lambert-bday-exe
     , mtl >=2.2.2
     , pretty-show
     , scientific
-    , serverless-haskell
+    , serverless-haskell >=0.10.1
     , slack-web
     , split
     , text
