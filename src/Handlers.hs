@@ -10,49 +10,60 @@ module Handlers where
 import GHC.Generics
 import Data.HashMap.Strict as HashMap
 import Control.Exception
+import Control.Lens
 import Control.Monad.Except
 import Control.Monad.Trans.AWS ( runAWST )
 import Network.Linklater
+import Network.AWS.DynamoDB.PutItem
+import Data.Text
+import Network.AWS.DynamoDB.Types
 import qualified Network.AWS.Env as AWSEnv
 import Network.AWS
 import Prelude
+import Domain.User
 import GHC.Prim
+import ENV
+
+sendReq env = runResourceT . runAWS env . send
 
 
-newMessage cmd u bday chan = 
-    SimpleMessage(EmojiIcon ":hand:") cmd chan ("Awesome, I’ve recorded @" <> u <> " birthday as " <> bday <> "!")
+-- newMessage username bday chan = 
+--     FormattedMessage (EmojiIcon ":hand:") "bday" chan (Format )
+newMessage username bday chan = 
+    SimpleMessage (EmojiIcon ":hand:") "bday" chan ("Awesome, I’ve recorded @" <> username <> " birthday as " <> bday <> "!")
 
-editMessage cmd u bday chan = 
-    SimpleMessage(EmojiIcon ":hand:") cmd chan ("Awesome, I’ve recorded @" <> u <> " birthday as " <> bday <> "!")
+editMessage username bday chan = 
+    SimpleMessage (EmojiIcon ":hand:") "bday" chan ("Awesome, I’ve recorded @" <> username <> " birthday as " <> bday <> "!")
 
-listMessage cmd u bday chan = 
-    SimpleMessage(EmojiIcon ":hand:") cmd chan ("Awesome, I’ve recorded @" <> u <> " birthday as " <> bday <> "!")
+listMessage username bday chan = 
+    SimpleMessage (EmojiIcon ":hand:") "bday" chan ("Awesome, I’ve recorded @" <> username <> " birthday as " <> bday <> "!")
 
-handleNew username bday chan token = do
-  env    <- newEnv Discover
-  either <- runExceptT $ say (newMessage "/bday" username bday chan) token
-  case either of
-    (Left  e) -> return "error"
-    (Right _) -> return ""
+-- Add userID as a key 
+handleNew username chan chanID config = do
+   env <- getEnvironment 
+--    bday <- Data.Text.Text "bday"
+   res <- sendReq env q
+   either <- runExceptT $ (say (newMessage username "bday" (Channel chanID chan)) config)
+   case either of
+    Left e -> putStrLn ("an error occurred! " <> show e)
+    Right _ -> putStrLn ""
+   where q = putItem "lambert-dev" & piItem .~ item
+         userID = generateID chan username
+         item = HashMap.fromList
+          [ ("id"       , attributeValue & avS .~ Just (generateID chanID username))
+        --   , ("sk"       , attributeValue & avS .~ Just (generateSK $ bday))
+          ]
 
-handleEdit username bday chan token = do
-  env    <- newEnv Discover
-  either <- runExceptT $ say (editMessage "/bday" username bday chan) token
-  case either of
-    (Left  e) -> return "error"
-    (Right _) -> return ""
+-- handleEdit username chan chanID config = do
+handleEdit username chan chanID config = undefined
+--    either <- runExceptT $ (say (editMessage username bday (Channel chanID chan)) config)
+--    case either of
+--     Left e -> putStrLn ("an error occurred! " <> show e)
+--     Right _ -> putStrLn ""
 
-handleList username bday chan token = do
-  env    <- newEnv Discover
-  either <- runExceptT $ say (listMessage "/bday" username bday chan) token
-  case either of
-    (Left  e) -> return "error"
-    (Right _) -> return ""
-
--- TODO
---       item = HashMap.fromList
---         [ ("id"       , attributeValue & avS .~ Just "123")
---         , ("sk"       , attributeValue & avS .~ Just "9876")
---         , ("username" , attributeValue & avS .~ Just username)
---         , ("bday"     , attributeValue & avS .~ Just bday)
---         ]
+handleList username chan chanID config = undefined
+-- handleList username chan chanID config = do
+--    either <- runExceptT $ (say (listMessage username bday (Channel chanID chan)) config)
+--    case either of
+--     Left e -> putStrLn ("an error occurred! " <> show e)
+--     Right _ -> putStrLn ""

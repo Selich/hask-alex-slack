@@ -18,7 +18,10 @@ dependencies:
 - amazonka-xray
 - amazonka
 - amazonka-core
+- wreq
+- uri-bytestring
 - bytestring
+- cryptohash-sha256
 - amazonka-s3
 - dotenv
 - split

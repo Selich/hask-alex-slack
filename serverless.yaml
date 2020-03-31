@@ -46,11 +46,6 @@ custom:
       migrate: true
       seed: true
       inMemory: true
-    seed:
-      dev:
-        sources:
-          - table: users
-            sources: [".seeds/users.json"]
 
   serverless-offline:
     port: 3333

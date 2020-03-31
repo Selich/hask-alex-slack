@@ -47,7 +47,7 @@ createUsr username bday chan env= do
   where q = putItem "lambert-dev" & piItem .~ item
         userID = generateID username
         item = HashMap.fromList
-          [ ("id"       , attributeValue & avS .~ Just (generateID username))
+          [ ("id"       , attributeValue & avS .~ Just (generateID chan username))
           , ("sk"       , attributeValue & avS .~ Just (generateSK $ bday))
           ]
 

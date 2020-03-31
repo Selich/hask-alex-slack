@@ -2,13 +2,13 @@
 
 module ENV where
 
-import System.Directory ( canonicalizePath )
-import System.FilePath.Posix          
-import Configuration.Dotenv
 import Network.AWS
 import Data.Text as Text
-import qualified Network.Linklater as Linklater
+import Configuration.Dotenv
+import System.FilePath.Posix          
 import System.Environment (lookupEnv)
+import System.Directory ( canonicalizePath )
+import qualified Network.Linklater as Linklater
 
 
 readDirFile :: FilePath -> IO Text

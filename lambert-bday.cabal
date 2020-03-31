@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 5abe57fe9f883547f25ed1806ae8c87b41b85c9d093fdb8c490e92351c9cc9cb
+-- hash: 5b794f75a388ee46bd1dbb9756669487f381c1577849f3db57fc1e29590d09af
 
 name:           lambert-bday
 version:        0.1.0.0
@@ -47,6 +47,7 @@ library
     , array
     , base >=4.7 && <5
     , bytestring
+    , cryptohash-sha256
     , directory
     , dotenv
     , dynamodb-simple
@@ -64,8 +65,10 @@ library
     , split
     , text
     , unordered-containers
+    , uri-bytestring
     , uuid
     , websockets >=0.12.7.0
+    , wreq
   default-language: Haskell2010
 
 executable lambert-bday-exe
@@ -86,6 +89,7 @@ executable lambert-bday-exe
     , array
     , base >=4.7 && <5
     , bytestring
+    , cryptohash-sha256
     , directory
     , dotenv
     , dynamodb-simple
@@ -104,6 +108,8 @@ executable lambert-bday-exe
     , split
     , text
     , unordered-containers
+    , uri-bytestring
     , uuid
     , websockets >=0.12.7.0
+    , wreq
   default-language: Haskell2010

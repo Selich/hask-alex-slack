@@ -9,11 +9,9 @@ import Data.Aeson.TH ( deriveJSON )
 import GHC.Generics
 import qualified Data.Text as T
 
-parseChannel chan = T.words (T.pack $ Prelude.filter (/='"') (show chan)) !! 1
 
--- generateID chan username = "USR#"  <> parseChannel chan <> "#" <> username
-generateID username = "USR#"  <> "#" <> username
-generateSK bday     = "BRTH#" <> bday
+generateID chan username = "USR#"  <> "#" <>  chan <> "#" <> username
+generateSK bday          = "BRTH#" <> bday
 
 type PK = Text
 type SK = Text
@@ -39,8 +37,6 @@ deriveJSON
 
 makeLenses ''User
 
-parseOutput :: Text -> Text -> UserOutput
-parseOutput username birthday = UserOutput (generateID username) (generateSK birthday)
 
 -- TODO: make this better
 parseUserInput :: Maybe Text -> Maybe Text -> User
