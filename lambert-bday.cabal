@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 5b794f75a388ee46bd1dbb9756669487f381c1577849f3db57fc1e29590d09af
+-- hash: afce08c93f0d30982ae4b2e91d6522d8818234a78463f1816ebc4888d9b57adb
 
 name:           lambert-bday
 version:        0.1.0.0
@@ -32,6 +32,33 @@ library
       Repositories.TransformUser
       Util.TokenParser
       Util.URLEncodedParser
+      Web.Slack
+      Web.Slack.Types
+      Web.Slack.Types.Base
+      Web.Slack.Types.Bot
+      Web.Slack.Types.Channel
+      Web.Slack.Types.ChannelOpt
+      Web.Slack.Types.Comment
+      Web.Slack.Types.Error
+      Web.Slack.Types.Event
+      Web.Slack.Types.Event.Subtype
+      Web.Slack.Types.File
+      Web.Slack.Types.Id
+      Web.Slack.Types.IM
+      Web.Slack.Types.Item
+      Web.Slack.Types.Message
+      Web.Slack.Types.Preferences
+      Web.Slack.Types.Presence
+      Web.Slack.Types.Self
+      Web.Slack.Types.Session
+      Web.Slack.Types.Subteam
+      Web.Slack.Types.Team
+      Web.Slack.Types.TeamPreferences
+      Web.Slack.Types.Time
+      Web.Slack.Types.Topic
+      Web.Slack.Types.User
+      Web.Slack.Utils
+      Web.Slack.WebAPI
   other-modules:
       Paths_lambert_bday
   hs-source-dirs:
@@ -51,24 +78,28 @@ library
     , directory
     , dotenv
     , dynamodb-simple
+    , errors
     , filepath
     , ghc-prim
     , hal
     , hashable
     , lens
+    , lens-aeson
     , linklater
     , mtl >=2.2.2
+    , network-uri
     , pretty-show
     , scientific
     , serverless-haskell >=0.10.1
-    , slack-web
     , split
     , text
+    , time
     , unordered-containers
     , uri-bytestring
     , uuid
     , websockets >=0.12.7.0
     , wreq
+    , wuss
   default-language: Haskell2010
 
 executable lambert-bday-exe
@@ -93,23 +124,27 @@ executable lambert-bday-exe
     , directory
     , dotenv
     , dynamodb-simple
+    , errors
     , filepath
     , ghc-prim
     , hal
     , hashable
     , lambert-bday
     , lens
+    , lens-aeson
     , linklater
     , mtl >=2.2.2
+    , network-uri
     , pretty-show
     , scientific
     , serverless-haskell >=0.10.1
-    , slack-web
     , split
     , text
+    , time
     , unordered-containers
     , uri-bytestring
     , uuid
     , websockets >=0.12.7.0
     , wreq
+    , wuss
   default-language: Haskell2010

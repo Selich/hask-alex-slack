@@ -27,9 +27,11 @@ dependencies:
 - split
 - filepath
 - directory
+- wuss
 - lens
 - dynamodb-simple
 - unordered-containers
+- network-uri
 - pretty-show
 - aeson-pretty
 - ghc-prim
@@ -37,8 +39,10 @@ dependencies:
 - uuid
 - hal
 - hashable
-- slack-web
 - websockets >= 0.12.7.0
+- errors
+- time
+- lens-aeson
 - array
 
 library:
