@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: afce08c93f0d30982ae4b2e91d6522d8818234a78463f1816ebc4888d9b57adb
+-- hash: 8196d32fc401bdb1820381c0f0ec935300301966120cadbc9b93c0d79553b153
 
 name:           lambert-bday
 version:        0.1.0.0
@@ -96,6 +96,7 @@ library
     , time
     , unordered-containers
     , uri-bytestring
+    , utf8-string
     , uuid
     , websockets >=0.12.7.0
     , wreq
@@ -143,6 +144,7 @@ executable lambert-bday-exe
     , time
     , unordered-containers
     , uri-bytestring
+    , utf8-string
     , uuid
     , websockets >=0.12.7.0
     , wreq

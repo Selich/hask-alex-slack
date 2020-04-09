@@ -11,6 +11,7 @@ import Prelude hiding (filter, lookup)
 import Data.Text ( Text, filter, pack, unpack , splitOn)
 import Data.Aeson
 import qualified Data.ByteString.Lazy as BLazy
+import Data.ByteString.Lazy.UTF8
 import Data.HashMap.Strict hiding (filter, map)
 import qualified Data.Text.Lazy as Lazy
 import Data.Text.Lazy.Encoding
@@ -36,81 +37,26 @@ parseBody (Object obj) = case lookup "body" obj of
     Just x  -> return x
     Nothing -> fail "no field 'body'"
 
-parseHeaders :: Value -> Maybe Value
-parseHeaders (Object obj) = case lookup "headers" obj of
-    Just x  -> return x
-    Nothing -> fail "no field 'header'"
-
-parseTS :: Value -> Maybe Value
-parseTS (Object obj) = case lookup "X-Slack-Request-Timestamp" obj of
-    Just x  -> return x
-    Nothing -> fail "no field 'timestamp'"
-
-parseSlackSign :: Value -> Maybe Value
-parseSlackSign (Object obj) = case lookup "X-Slack-Signature" obj of
-    Just x  -> return x
-    Nothing -> fail "no field 'signature'"
-
-newtype NoQuotes = NoQuotes String
-instance Show NoQuotes where show (NoQuotes str) = str
-
 -- TODO: Get token from DynamoDB
 handler :: Value -> IO ()
 handler event = do
   -- token
   token <- readDirFile ".env"
-  secret <- readDirFile "secret"
 
-
-  print event
-  -- TODO: Ne moze da uhvati request timestamp
   body   <- case parseBody event of
-    Just x  -> return x
-    Nothing -> fail "No field 'header'"
-
-  headers   <- case parseHeaders event of
     Just x  -> return x
     Nothing -> fail "No field 'body'"
 
-  timestamp <- case parseTS headers of 
-    Just x  -> return x
-    Nothing -> fail "No field 'timestamp'"
+  let query  =  parseQuery $ encode body
+  bs         <- liftMaybe $ search "text" query
+  bsChanID   <- liftMaybe $ search "channel_id" query
+  bsChan     <- liftMaybe $ search "channel_name" query
+  let args    = splitOn "+" $ Lazy.toStrict (decodeUtf8 bs)
+  let chanID =  Lazy.toStrict (decodeUtf8 bsChanID)
+  let chan   =  Lazy.toStrict (decodeUtf8 bsChan)
+  bot chanID chan (Linklater.Config token) args
 
-  slackSig <- case parseSlackSign headers of 
-    Just x  -> return x
-    Nothing -> fail "No field 'signature'"
-  ----------------------------
-
-  print headers
-  print body
-  print timestamp
-  print slackSig
-
-  -- TODO Eliminate (") and (\) before generating hash
-  let sigBasestring = "v0:" <> encode timestamp <> ":" <> encode body
-  print sigBasestring
-  -- WORKS
-  ----------------------------------
-
-  -- let sig = "v0=" + 
-  let secretSign = encode secret
-  let sig = "v0=" <> Hash.hmac (BLazy.toStrict secretSign) (BLazy.toStrict sigBasestring)
-
-  print sig
-  print slackSig
-
-  print $ compare sig (BLazy.toStrict ( encode slackSig))
-  
-
-  -- let query  =  parseQuery $ encode body
-  -- bs         <- liftMaybe $ search "text" query
-  -- bsChanID   <- liftMaybe $ search "channel_id" query
-  -- bsChan     <- liftMaybe $ search "channel_name" query
-  -- let args    = splitOn "+" $ Lazy.toStrict (decodeUtf8 bs)
-  -- let chanID =  Lazy.toStrict (decodeUtf8 bsChanID)
-  -- let chan   =  Lazy.toStrict (decodeUtf8 bsChan)
-  -- bot chanID chan (Linklater.Config token) args
-
+bot :: Text -> Text -> Linklater.Config -> [Text] -> IO()
 bot chanID chan config args = case head args of
          "new"   -> handleNew   (args !! 1) chan chanID config
          "edit"  -> handleEdit  (args !! 1) chan chanID config

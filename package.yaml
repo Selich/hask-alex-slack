@@ -44,6 +44,7 @@ dependencies:
 - time
 - lens-aeson
 - array
+- utf8-string
 
 library:
   source-dirs: src

@@ -42,17 +42,17 @@ listMessage username bday chan =
 handleNew username chan chanID config = do
    env <- getEnvironment 
 --    bday <- Data.Text.Text "bday"
-   res <- sendReq env q
+--    res <- sendReq env q
    either <- runExceptT $ (say (newMessage username "bday" (Channel chanID chan)) config)
    case either of
     Left e -> putStrLn ("an error occurred! " <> show e)
     Right _ -> putStrLn ""
-   where q = putItem "lambert-dev" & piItem .~ item
-         userID = generateID chan username
-         item = HashMap.fromList
-          [ ("id"       , attributeValue & avS .~ Just (generateID chanID username))
-        --   , ("sk"       , attributeValue & avS .~ Just (generateSK $ bday))
-          ]
+--    where q = putItem "lambert-dev" & piItem .~ item
+--          userID = generateID chan username
+--          item = HashMap.fromList
+--           [ ("id"       , attributeValue & avS .~ Just (generateID chanID username))
+--         --   , ("sk"       , attributeValue & avS .~ Just (generateSK $ bday))
+--           ]
 
 -- handleEdit username chan chanID config = do
 handleEdit username chan chanID config = undefined

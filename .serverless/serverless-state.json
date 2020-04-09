@@ -190,7 +190,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/lambert-bday/dev/1585651422263-2020-03-31T10:43:42.263Z/lambert-bday.zip"
+                "S3Key": "serverless/lambert-bday/dev/1586437867961-2020-04-09T13:11:07.961Z/lambert-bday.zip"
               },
               "FunctionName": "lambert-bday-dev-main",
               "Handler": "lambert-bday.lambert-bday-exe",
@@ -208,10 +208,10 @@
                   "DYNAMODB_TABLE": "lambert-dev",
                   "OAUTH_REDIRECT_URI": "https://dev.lambertbot.com/auth/callback",
                   "SLACK_BOT_SCOPE": "chat:write,commands,dnd:read,incoming-webhook,users:read",
-                  "SLACK_CLIENT_ID": "47546637283.926884337346",
-                  "LUMIGO_TOKEN": "t_108a4692dc774e7abfb23",
                   "SLACK_CLIENT_SECRET": "86dff7eca48aa1eb386ffa278989e315",
-                  "SLACK_BOT_SIGNING_SECRET": "e763e0a1cfed6788e0ea6e2ce0c3ce8b"
+                  "SLACK_BOT_SIGNING_SECRET": "e763e0a1cfed6788e0ea6e2ce0c3ce8b",
+                  "LUMIGO_TOKEN": "t_108a4692dc774e7abfb23",
+                  "SLACK_CLIENT_ID": "47546637283.926884337346"
                 }
               }
             },
@@ -220,14 +220,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "MainLambdaVersionJnBgKKSxYqKibFc7TB0NgNCbdXWwc1TYIDVJBMWst6Y": {
+          "MainLambdaVersionPFFNrKiKO46kPj84vUgZkl1HsCUGA06hnWO6qCJBVGo": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "MainLambdaFunction"
               },
-              "CodeSha256": "iHXpLAoVd6yCdGQDUj6cmM0yFUX1SqXOiAk9DVj+YTQ="
+              "CodeSha256": "NH+nPh9TOCYZFjjyxUaB2RsafabC61jzUj0p6iDfaaY="
             }
           },
           "ApiGatewayRestApi": {
@@ -336,7 +336,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1585651401771": {
+          "ApiGatewayDeployment1586437847110": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -396,7 +396,7 @@
           "MainLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "MainLambdaVersionJnBgKKSxYqKibFc7TB0NgNCbdXWwc1TYIDVJBMWst6Y"
+              "Ref": "MainLambdaVersionPFFNrKiKO46kPj84vUgZkl1HsCUGA06hnWO6qCJBVGo"
             }
           },
           "ServiceEndpoint": {
@@ -565,26 +565,26 @@
         "environment": {
           "OAUTH_REDIRECT_URI": "https://dev.lambertbot.com/auth/callback",
           "SLACK_BOT_SCOPE": "chat:write,commands,dnd:read,incoming-webhook,users:read",
-          "SLACK_CLIENT_ID": "47546637283.926884337346",
-          "LUMIGO_TOKEN": "t_108a4692dc774e7abfb23",
           "SLACK_CLIENT_SECRET": "86dff7eca48aa1eb386ffa278989e315",
-          "SLACK_BOT_SIGNING_SECRET": "e763e0a1cfed6788e0ea6e2ce0c3ce8b"
+          "SLACK_BOT_SIGNING_SECRET": "e763e0a1cfed6788e0ea6e2ce0c3ce8b",
+          "LUMIGO_TOKEN": "t_108a4692dc774e7abfb23",
+          "SLACK_CLIENT_ID": "47546637283.926884337346"
         },
         "runtime": "nodejs12.x",
         "package": {},
         "memory": 1024,
         "timeout": 6,
         "vpc": {},
-        "versionLogicalId": "MainLambdaVersionJnBgKKSxYqKibFc7TB0NgNCbdXWwc1TYIDVJBMWst6Y"
+        "versionLogicalId": "MainLambdaVersionPFFNrKiKO46kPj84vUgZkl1HsCUGA06hnWO6qCJBVGo"
       }
     },
     "serviceFilename": "serverless.yaml",
     "layers": {},
     "isDashboardMonitoringPreconfigured": false,
-    "artifact": "/home/selic/Desktop/hask-alex-slack/.serverless/lambert-bday.zip"
+    "artifact": "/home/selic/Projects/has/.serverless/lambert-bday.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/lambert-bday/dev/1585651422263-2020-03-31T10:43:42.263Z",
+    "artifactDirectoryName": "serverless/lambert-bday/dev/1586437867961-2020-04-09T13:11:07.961Z",
     "artifact": "lambert-bday.zip"
   }
 }
