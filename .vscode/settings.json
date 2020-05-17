@@ -13,5 +13,10 @@
             ]
         }
     ],
-    "serverlessConsole.autoRefreshInterval": 5000
+    "serverlessConsole.autoRefreshInterval": 5000,
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#0A3334",
+        "titleBar.activeBackground": "#0E4749",
+        "titleBar.activeForeground": "#F3FDFD"
+    }
 }

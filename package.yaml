@@ -10,33 +10,12 @@ description:         Please see the README on GitHub at <https://github.com/Seli
 dependencies:
 - base >= 4.7 && < 5
 - linklater
-- text
 - mtl >= 2.2.2
-- aeson
-- serverless-haskell >= 0.10.1
 - amazonka-dynamodb
 - amazonka-xray
 - amazonka
 - amazonka-core
-- bytestring
-- amazonka-s3
-- dotenv
-- split
-- filepath
-- directory
-- lens
-- dynamodb-simple
-- unordered-containers
-- pretty-show
-- aeson-pretty
-- ghc-prim
-- scientific
-- uuid
-- hal
-- hashable
-- slack-web
-- websockets >= 0.12.7.0
-- array
+
 
 library:
   source-dirs: src
