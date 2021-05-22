@@ -1,6 +1,5 @@
-# Lambert
+# hask-alex-slack
 
-Lambert-bday is a part of LambdaWorks Slack bot used to view or add users birthdays
 
 ## Requirements
 
