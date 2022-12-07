@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "Birthday bot",
   "dependencies": {
-    "serverless": "^1.65.0",
+    "serverless": "^3.25.1",
     "serverless-dynamodb-local": "^0.2.39",
-    "serverless-haskell": "^0.10.2",
+    "serverless-haskell": "^0.12.6",
     "serverless-offline": "^5.12.1",
     "serverless-ssm-fetch": "^1.0.2"
   }
